@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\TokenVerificationMiddleware;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -12,7 +13,13 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+
+        $middleware->alias([
+            'verify.token' => TokenVerificationMiddleware::class,
+            'email_otp' => TokenVerificationMiddleware::class,
+            'verify_otp' => TokenVerificationMiddleware::class,
+
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

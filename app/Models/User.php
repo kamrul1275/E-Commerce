@@ -19,11 +19,7 @@ class User extends Authenticatable implements JWTSubject
      * @var list<string>
      */
     protected $fillable = [
-        'firstName',
-        'lastName',
-        'mobile',
         'email',
-        'password',
         'otp',
     ];
 
@@ -64,6 +60,28 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    // //relation with brands
+    // public function brands()
+    // {
+    //     return $this->hasMany(Brand::class);
+    // }
+    // //relation with categories
+    // public function categories()
+    // {
+    //     return $this->hasMany(Category::class);
+    // }
+    // //relation with products
+    // public function products()
+    // {
+    //     return $this->hasMany(Product::class);
+    // }
+
+    // relation with CustomerProfile
+    public function customerProfile()
+    {
+        return $this->hasOne(CustomerProfile::class);
     }
 
 
