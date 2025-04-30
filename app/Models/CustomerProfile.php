@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
 
 class CustomerProfile extends Model
 {
@@ -21,5 +22,10 @@ class CustomerProfile extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function productreviews()
+    {
+        return $this->hasMany(ProductReview::class);
     }
 }

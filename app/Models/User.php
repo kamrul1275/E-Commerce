@@ -25,8 +25,8 @@ class User extends Authenticatable implements JWTSubject
 
     protected $attributes = [
 
-            'otp' => '0',
-        ];
+        'otp' => '0',
+    ];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -62,27 +62,31 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
-    // //relation with brands
-    // public function brands()
-    // {
-    //     return $this->hasMany(Brand::class);
-    // }
-    // //relation with categories
-    // public function categories()
-    // {
-    //     return $this->hasMany(Category::class);
-    // }
-    // //relation with products
-    // public function products()
-    // {
-    //     return $this->hasMany(Product::class);
-    // }
 
-    // relation with CustomerProfile
+    ///relation with CustomerProfile
     public function customerProfile()
     {
         return $this->hasOne(CustomerProfile::class);
     }
 
 
+
+    public function productcart()
+    {
+        return $this->hasMany(ProductCart::class);
+    }
+    public function productWishlist()
+    {
+        return $this->hasMany(ProductWishe::class);
+    }
+
+    public function invoice()
+    {
+        return $this->hasMany(Invoice::class);
+    }
+
+    public function invoiceProduct()
+    {
+        return $this->hasMany(InvoiceProduct::class);
+    }
 }
