@@ -26,6 +26,7 @@ class BrandController extends Controller
 
     public function storeBrand(Request $request)
     {
+        // dd("hello");
         // Validate request
         $validator = Validator::make($request->all(), [
             'brandName' => 'required|string|max:100|unique:brands',
@@ -38,14 +39,14 @@ class BrandController extends Controller
                 'message' => $validator->errors()
             ], 422);
         }
-        dd($request->all());
+        //  dd($request->all());
 
         // Handle file upload
         if ($request->hasFile('brandImg')) {
             $image = $request->file('brandImg');
             $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('uploads/brands'), $imageName);
-            $imagePath = 'uploads/brands/' . $imageName;
+            $image->move(public_path('public/uploads/brands'), $imageName);
+            $imagePath = 'public/uploads/brands/' . $imageName;
         }
 
         // Create brand

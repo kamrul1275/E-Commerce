@@ -21,6 +21,8 @@ class CategoryController extends Controller
 
     function storelCategory(Request $request)
     {
+
+        // dd("efeff");
         // Validate request
         $validator = Validator::make($request->all(), [
             'categoryName' => 'required|string|max:100|unique:categories',
@@ -33,6 +35,8 @@ class CategoryController extends Controller
                 'message' => $validator->errors()
             ], 422);
         }
+
+        // dd($request->all());
 
         // Handle file upload
         if ($request->hasFile('categoryImg')) {
