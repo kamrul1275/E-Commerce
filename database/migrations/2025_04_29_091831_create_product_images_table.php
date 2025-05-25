@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('policies', function (Blueprint $table) {
+        Schema::create('product_images', function (Blueprint $table) {
             $table->id();
-            $table->enum('type', ['refund', 'terms', 'about', 'contact', 'how to buy', 'privacy', 'complain']);
-            $table->longText('des');
+            $table->foreignId('product_id')->constrained('products')->onDelete('cascade');
+            $table->string('image_url');
             $table->timestamps();
         });
     }
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('policies');
+        Schema::dropIfExists('product_images');
     }
 };

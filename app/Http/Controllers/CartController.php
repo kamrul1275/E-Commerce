@@ -2,13 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use Illuminate\Http\Request;
 
-class ProductCartController extends Controller
+class CartController extends Controller
 {
-    function allProductCart()
+        function allProductCart()
     {
-        return response()->json(['message' => 'Product cart retrieved successfully'], 200);
+        // Fetch all product carts logic here
+        $carts= Cart::with('product', 'user')->get();
+
+        return response()->json(['message' => 'Product cart retrieved successfully',
+    'data'=>$carts], 200);
     }//end method
 
 
@@ -22,8 +27,12 @@ class ProductCartController extends Controller
         ]);
 
         // Store product cart logic here
+        $cart = new Cart();
+        $cart->product_id = $request->product_id;
+        $cart->user_id = $request->user_id;
+        $cart->quantity = $request->quantity;
+        $cart->save();
 
         return response()->json(['message' => 'Product cart created successfully'], 201);
     }//end method
-    
 }

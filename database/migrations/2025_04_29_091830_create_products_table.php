@@ -15,12 +15,13 @@ return new class extends Migration
 
             $table->id();
             $table->string('title');
-            $table->text('short_des');
-            $table->tinyInteger('discount')->nullable();
+            $table->string('slug')->unique();
+            $table->text('description')->nullable();
             $table->decimal('price', 10, 2);
-            $table->string('image');
-            $table->tinyInteger('stock');
-            $table->double('star');
+            $table->decimal('discount_price', 10, 2)->nullable();
+            $table->integer('stock_quantity');
+            $table->string('image')->nullable();
+            $table->boolean('status')->default(true);
             $table->enum('remark', ['New', 'Popular', 'Top', 'Special'])->nullable();
             $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
             $table->foreignId('brand_id')->constrained('brands')->onDelete('cascade');

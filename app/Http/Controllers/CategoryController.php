@@ -22,7 +22,6 @@ class CategoryController extends Controller
     function storelCategory(Request $request)
     {
 
-        // dd("efeff");
         // Validate request
         $validator = Validator::make($request->all(), [
             'categoryName' => 'required|string|max:100|unique:categories',
@@ -36,7 +35,6 @@ class CategoryController extends Controller
             ], 422);
         }
 
-        // dd($request->all());
 
         // Handle file upload
         if ($request->hasFile('categoryImg')) {
@@ -47,10 +45,13 @@ class CategoryController extends Controller
         }
 
         // Create category
-        $category = Category::create([
-            'categoryName' => $request->categoryName,
-            'categoryImg' => $imagePath ?? null
-        ]);
+        $category = new Category();
+        $category->categoryName = $request->categoryName;
+        $category->slug = strtolower(str_replace(' ', '-', $request->categoryName));
+        $category->categoryImg = $imagePath ?? null;
+        //dd($category);
+        // Save category to database
+        $category->save();
 
         return response()->json([
             'status' => 'success',
@@ -59,3 +60,5 @@ class CategoryController extends Controller
         ], 201);
     } //end method
 }
+// end class
+// end file

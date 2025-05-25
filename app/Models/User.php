@@ -18,15 +18,11 @@ class User extends Authenticatable implements JWTSubject
      *
      * @var list<string>
      */
-    protected $fillable = [
-        'email',
-        'otp',
-    ];
+protected $fillable = [
+    'name', 'email', 'password', 'phone', 'address', 'photo', 'role'
+];
 
-    protected $attributes = [
 
-        'otp' => '0',
-    ];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -73,11 +69,11 @@ class User extends Authenticatable implements JWTSubject
 
     public function productcart()
     {
-        return $this->hasMany(ProductCart::class);
+        return $this->hasMany(Cart::class);
     }
     public function productWishlist()
     {
-        return $this->hasMany(ProductWishe::class);
+        return $this->hasMany(Wishlist::class);
     }
 
     public function invoice()

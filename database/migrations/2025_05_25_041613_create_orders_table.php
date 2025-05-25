@@ -11,12 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('product_reviews', function (Blueprint $table) {
+        Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('product_id')->constrained('products')->onDelete('cascade');
-            $table->integer('rating');
-            $table->text('comment')->nullable();
+            $table->string('order_number')->unique();
+            $table->string('status')->default('pending');
+            $table->decimal('total_amount', 10, 2);
+            $table->decimal('shipping_fee', 10, 2)->default(0);
+            $table->string('payment_method')->nullable();
+            $table->text('shipping_address');
+            $table->timestamp('ordered_at')->nullable();
             $table->timestamps();
         });
     }
@@ -26,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('product_reviews');
+        Schema::dropIfExists('orders');
     }
 };

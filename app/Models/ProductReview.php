@@ -6,12 +6,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProductReview extends Model
 {
+
+    protected $fillable = [
+        'user_id',
+        'product_id',
+        'rating',
+        'comment',
+    ];
+
     public function product()
     {
         return $this->belongsTo(Product::class);
     }
-    public function customerProfile()
+    public function user()
     {
-        return $this->belongsTo(CustomerProfile::class);
+        return $this->belongsTo(User::class);
     }
 }

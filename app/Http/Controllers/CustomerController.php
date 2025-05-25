@@ -9,7 +9,22 @@ use Illuminate\Support\Facades\Validator;
 
 class CustomerController extends Controller
 {
-    public function customerProfile(Request $request)
+
+
+
+function customersProfile(){
+
+$customers = CustomerProfile::get();
+
+        return response()->json([
+            'status' => 'succes',
+            'data' => $customers
+        ], 201);
+
+}
+
+
+    public function createCustomerProfile(Request $request)
     {
         // Validate request
         $validator = Validator::make($request->all(), [
@@ -36,6 +51,9 @@ class CustomerController extends Controller
                 'message' => $validator->errors()
             ], 422);
         }
+
+
+        // dd($request->all());
     
         // Update or create user
         $user = User::updateOrCreate(

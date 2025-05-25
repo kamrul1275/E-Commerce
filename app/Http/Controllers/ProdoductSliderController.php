@@ -21,6 +21,8 @@ class ProdoductSliderController extends Controller
             'slider_image' => 'required|string',
         ]);
 
+        dd($request->all());
+
         // Store product slider logic here
 
         return response()->json(['message' => 'Product slider created successfully'], 201);

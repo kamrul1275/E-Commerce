@@ -6,21 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    protected $fillable = [
+
+  protected $fillable = [
         'title',
-        'short_des',
-        'discount',
+        'description',
         'price',
+        'discount_price',
         'image',
-        'stock',
-        'star',
+        'stock_quantity',
+        'status',
         'remark',
         'category_id',
-        'brand_id',
-
+        'brand_id'
     ];
-
-
 
     public function brand()
     {
@@ -39,18 +37,13 @@ class Product extends Model
         return $this->hasMany(ProductDetails::class);
     }
 
-    public function productcarts()
-    {
-        return $this->hasMany(ProductCart::class);
-    }
+    // public function productcarts()
+    // {
+    //     return $this->hasMany(ProductCart::class);
+    // }
 
     public function productreviews()
     {
         return $this->hasMany(ProductReview::class);
-    }
-
-    public function invoice_products()
-    {
-        return $this->hasMany(InvoiceProduct::class);
     }
 }

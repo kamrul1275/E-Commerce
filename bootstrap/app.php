@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\RoleMiddleware;
 use App\Http\Middleware\TokenVerificationMiddleware;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -18,6 +19,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'verify.token' => TokenVerificationMiddleware::class,
             'email_otp' => TokenVerificationMiddleware::class,
             'verify_otp' => TokenVerificationMiddleware::class,
+            'role'=> RoleMiddleware::class,
 
         ]);
     })
